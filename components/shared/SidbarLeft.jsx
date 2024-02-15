@@ -7,7 +7,7 @@ import { SignOutButton, SignedIn, UserButton } from "@clerk/nextjs";
 
 const SidbarLeft = () => {
   return (
-    <div className="min-h-screen sticky left-0 top-0 overflow-auto px-10 flex flex-col gap-6 py-4 max-md:hidden">
+    <div className="min-h-screen sticky left-0 top-0 overflow-auto mt-1 px-10 flex flex-col gap-6 py-4 max-md:hidden">
       <Link
         href={"/"}
         className="flex items-baseline justify-center text-white"
