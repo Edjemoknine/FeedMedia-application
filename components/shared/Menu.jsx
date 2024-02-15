@@ -15,8 +15,8 @@ const Menu = () => {
           <Link
             href={link.route}
             key={link.label}
-            className={`flex gap-4  my-3 justify-start hover:bg-sky-400 rounded-lg py-2 px-4 ${
-              isActive && "bg-sky-400"
+            className={`flex gap-4 items-center  my-2 text-sm justify-start hover:bg-[#2563eb] rounded-lg py-1.5 px-4 ${
+              isActive && "bg-[#2563eb]"
             }`}
           >
             {link.icon} <p className="text-white">{link.label}</p>

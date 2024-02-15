@@ -2,22 +2,22 @@ import { Home, ImagePlus, Users, UserCheck } from "lucide-react";
 
 export const menuLinks = [
   {
-    icon: <Home className="text-white " size={30} />,
+    icon: <Home className="text-white " size={25} />,
     route: "/",
     label: "Home",
   },
   {
-    icon: <ImagePlus className="text-white " size={30} />,
+    icon: <ImagePlus className="text-white " size={25} />,
     route: "/create-post",
     label: "Create Post",
   },
   {
-    icon: <Users className="text-white " size={30} />,
+    icon: <Users className="text-white " size={25} />,
     route: "/people",
     label: "People",
   },
   {
-    icon: <UserCheck className="text-white " size={30} />,
+    icon: <UserCheck className="text-white " size={25} />,
     route: "/edit-post",
     label: "Edite Profile",
   },

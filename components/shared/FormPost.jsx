@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,11 +16,11 @@ import {
 import { Input } from "@/components/ui/input";
 import UploadImage from "./UploadImage";
 import { useState } from "react";
+import { createPostAction } from "@/lib/actions/postActions";
+import { useRouter } from "next/navigation";
+import { useUploadThing } from "@/utils/uploadthing";
 
 const formSchema = z.object({
-  title: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
   description: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
@@ -31,21 +30,43 @@ const formSchema = z.object({
   imageUrl: z.string(),
 });
 
-export default function FormPost() {
+export default function FormPost({ type }) {
+  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
       description: "",
       tags: "",
       imageUrl: "",
     },
   });
+  const { startUpload } = useUploadThing("imageUploader");
 
   const [files, setFiles] = useState([]);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    let uploadedImageUrl = data.imageUrl;
+
+    if (files.length > 0) {
+      const uploadedImages = await startUpload(files);
+
+      if (!uploadedImages) {
+        return;
+      }
+
+      uploadedImageUrl = uploadedImages[0].url;
+    }
+
+    if (type === "Create") {
+      try {
+        await createPostAction({ ...data, imageUrl: uploadedImageUrl });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    form.reset();
+    router.push("/");
   };
 
   return (
@@ -69,19 +90,6 @@ export default function FormPost() {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input placeholder="Title" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name="description"

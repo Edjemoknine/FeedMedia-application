@@ -12,7 +12,7 @@ export default function MainContainer({ children }) {
   const title = pageTitles.find((page) => page.url === firstPath)?.title || "";
 
   return (
-    <section className="flex flex-col flex-1 max-w-3xl px-4 md:px-10 lg:px-4 xl:px-20">
+    <section className="flex flex-col flex-1 max-w-3xl px-4 lg:px-4">
       <Navbar />
       <div className="mt-6 mb-20">
         <h1 className="text-xl font-semibold mb-5 text-white sm:text-2xl">

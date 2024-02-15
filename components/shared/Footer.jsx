@@ -20,7 +20,7 @@ const Footer = () => {
             }`}
           >
             {link.icon}{" "}
-            <p className="text-white text-xs sm:hidden">{link.label}</p>
+            <p className="text-white text-xs sm:hidden hidden">{link.label}</p>
           </Link>
         );
       })}

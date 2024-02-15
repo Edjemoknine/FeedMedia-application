@@ -1,10 +1,9 @@
 import FormPost from "@/components/shared/FormPost";
-import React from "react";
 
 const CreatePost = () => {
   return (
     <div className="pt-6">
-      <FormPost postData={""} handlePublish={""} />
+      <FormPost type="Create" />
     </div>
   );
 };
