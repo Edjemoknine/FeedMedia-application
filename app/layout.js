@@ -3,8 +3,8 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import SidbarRight from "@/components/shared/SidbarRight";
 import SidbarLeft from "@/components/shared/SidbarLeft";
-import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
+import MainContainer from "@/components/shared/MainContainer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,14 +17,11 @@ export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
-          <main className="flex flex-row">
-            <SidbarRight />
-            <div>
-              <Navbar />
-              {children}
-            </div>
+        <body className={`${inter.className} bg-gray-800`}>
+          <main className="flex flex-row ">
             <SidbarLeft />
+            <MainContainer>{children}</MainContainer>
+            <SidbarRight />
           </main>
           <Footer />
         </body>
