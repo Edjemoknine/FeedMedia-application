@@ -6,9 +6,11 @@ import { LogOut, Plus, Search } from "lucide-react";
 import Link from "next/link";
 import { SignOutButton, SignedIn } from "@clerk/nextjs";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
+  const router = useRouter();
 
   return (
     <div className="w-full  flex justify-between gap-4 items-center mt-6">
@@ -22,7 +24,7 @@ const Navbar = () => {
         />
         <Search
           className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500 "
-          onClick={() => {}}
+          onClick={() => router.push(`/search/posts/${search}`)}
         />
       </div>
       <Button className="hidden md:flex" size={"sm"}>

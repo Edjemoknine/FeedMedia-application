@@ -106,7 +106,7 @@ export default function FormPost({ type, Postdata }) {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel className="text-gray-300">Description</FormLabel>
                 <FormControl>
                   <Input placeholder="description" {...field} />
                 </FormControl>
@@ -119,7 +119,7 @@ export default function FormPost({ type, Postdata }) {
             name="tags"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Tags</FormLabel>
+                <FormLabel className="text-gray-300">Tags</FormLabel>
                 <FormControl>
                   <Input placeholder="Tags" {...field} />
                 </FormControl>
@@ -127,7 +127,9 @@ export default function FormPost({ type, Postdata }) {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button disable={form.formState.isSubmitting} type="submit">
+            {form.formState.isSubmitting ? `${type}...` : type}
+          </Button>
         </form>
       </Form>
     </>

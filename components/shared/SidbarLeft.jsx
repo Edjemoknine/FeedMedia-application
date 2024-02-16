@@ -71,7 +71,7 @@ const SidbarLeft = () => {
         </div>
         <SignedIn>
           <SignOutButton>
-            <div className="flex gap-4  justify-start rounded-lg py-2 px-4 ">
+            <div className="flex gap-4 cursor-pointer hover:bg-blue-700 justify-start rounded-lg py-1.5 px-4 ">
               <LogOut size={25} className="text-white" />
               <p className="font-semibold text-white">Log out</p>
             </div>

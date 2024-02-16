@@ -9,7 +9,6 @@ const getPost = async (id) => {
 };
 const EditPost = async ({ params: { id } }) => {
   const postData = await getPost(id);
-  console.log(postData);
 
   return (
     <div>
