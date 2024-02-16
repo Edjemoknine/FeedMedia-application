@@ -30,15 +30,16 @@ const formSchema = z.object({
   imageUrl: z.string(),
 });
 
-export default function FormPost({ type }) {
+export default function FormPost({ type, Postdata }) {
+  const initialState = {
+    description: Postdata?.description || "",
+    tags: Postdata?.tags || "",
+    imageUrl: Postdata?.imageUrl || "",
+  };
   const router = useRouter();
   const form = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      description: "",
-      tags: "",
-      imageUrl: "",
-    },
+    defaultValues: initialState,
   });
   const { startUpload } = useUploadThing("imageUploader");
 
@@ -63,10 +64,20 @@ export default function FormPost({ type }) {
       } catch (error) {
         console.log(error);
       }
+    } else {
+      try {
+        await fetch(`http://localhost:3000/api/post/${Postdata._id}`, {
+          method: "PUT",
+          body: JSON.stringify({ ...data, imageUrl: uploadedImageUrl }),
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     form.reset();
     router.push("/");
+    router.refresh();
   };
 
   return (
