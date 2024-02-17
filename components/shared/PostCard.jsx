@@ -13,7 +13,7 @@ import Link from "next/link";
 
 const PostCard = ({ post }) => {
   const { userId } = auth();
-  const currentUser = post.creator.clerkId;
+  const currentUser = post?.creator?.clerkId;
   const isLiked = false;
   const isSaved = false;
 
@@ -23,31 +23,31 @@ const PostCard = ({ post }) => {
         <CardTitle className="flex justify-between items-center gap-3">
           <Link
             className="flex text-white mb-3 flex-row gap-3 items-center"
-            href={`/profile/${post.creator._id}`}
+            href={`/profile/${post?.creator?._id}/posts`}
           >
             <Image
-              src={post.creator.profilePhoto}
+              src={post?.creator?.profilePhoto}
               alt="avatar"
               width={50}
               height={50}
               className="rounded-full border-2 border-white"
             />
-            <p>{post.creator.userName}</p>
+            <p>{post?.creator?.userName}</p>
           </Link>
           {currentUser === userId && (
-            <Link href={`/update/${post._id}`}>
+            <Link href={`/update/${post?._id}`}>
               <Edit className="text-white " />
             </Link>
           )}
         </CardTitle>
         <CardDescription className="text-gray-300">
-          {post.description}
+          {post?.description}
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4">
         <div className="relative  overflow-hidden md:h-96  h-64 rounded-lg w-full">
           <Image
-            src={post.imageUrl}
+            src={post?.imageUrl}
             className="object-cover rounded-lg"
             alt="image Post"
             fill
@@ -63,7 +63,7 @@ const PostCard = ({ post }) => {
             ) : (
               <Heart className="cursor-pointer" />
             )}
-            <p>{post.likes.length}</p>
+            <p>{post?.likes.length}</p>
           </div>
           {!(currentUser === userId) &&
             (isSaved ? (

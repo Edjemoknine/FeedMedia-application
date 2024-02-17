@@ -13,14 +13,14 @@ const getCurrentUser = async (id) => {
 const UserCard = async ({ someone }) => {
   const { userId } = auth();
   const user = await getCurrentUser(userId);
-
+  console.log(user);
   const isFollowing = user?.following?.find((foll) => foll._id === someone._id);
 
   return (
     <div>
       <div className="flex gap-3 mb-3 hover:bg-gray-700 duration-300 rounded-lg p-3 items-center justify-between">
         <Link
-          href={`/profile/${someone._id}`}
+          href={`/profile/${someone._id}/posts`}
           className="flex items-center gap-3"
         >
           <Image
