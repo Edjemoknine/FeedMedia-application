@@ -13,9 +13,9 @@ const getCurrentUser = async (id) => {
 const UserCard = async ({ someone }) => {
   const { userId } = auth();
   const user = await getCurrentUser(userId);
-  console.log(user);
-  const isFollowing = user?.following?.find((foll) => foll._id === someone._id);
 
+  const isFollowing = user?.following?.find((foll) => foll._id === someone._id);
+  const userProId = someone?._id;
   return (
     <div>
       <div className="flex gap-3 mb-3 hover:bg-gray-700 duration-300 rounded-lg p-3 items-center justify-between">
@@ -35,6 +35,14 @@ const UserCard = async ({ someone }) => {
             <p className="text-gray-400">{someone.firstName}</p>
           </div>
         </Link>
+
+        <FollowCard
+          userId={userId}
+          isFollowing={isFollowing}
+          id={userProId.toString()}
+          clerkId={someone.clerkId}
+          user={user}
+        />
         {userId !== someone.clerkId &&
           (isFollowing ? (
             <UserPlus className="cursor-pointer text-white" />

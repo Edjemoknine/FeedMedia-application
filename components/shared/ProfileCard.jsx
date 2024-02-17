@@ -3,6 +3,7 @@ import { UserMinus, UserPlus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import FollowCard from "./FollowCard";
 
 const getCurrentUser = async (id) => {
   const response = await fetch(`http://localhost:3000/api/users/${id}`);
@@ -13,10 +14,10 @@ const getCurrentUser = async (id) => {
 const ProfileCard = async ({ userProfile }) => {
   const { userId } = auth();
   const user = await getCurrentUser(userId);
-  console.log(user);
   const isFollowing = user?.following?.find(
     (foll) => foll._id === userProfile._id
   );
+  const userProId = userProfile?._id;
 
   return (
     <div>
@@ -50,12 +51,13 @@ const ProfileCard = async ({ userProfile }) => {
             </div>
           </div>
         </div>
-        {userId !== userProfile.clerkId &&
-          (isFollowing ? (
-            <UserPlus className="cursor-pointer text-white" />
-          ) : (
-            <UserMinus className="cursor-pointer text-white" />
-          ))}
+        <FollowCard
+          userId={userId}
+          isFollowing={isFollowing}
+          id={userProId.toString()}
+          clerkId={userProfile.clerkId}
+          user={user}
+        />
       </div>
       <div className="flex items-center gap-6">
         <Link

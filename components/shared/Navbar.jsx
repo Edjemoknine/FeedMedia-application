@@ -19,7 +19,7 @@ const Navbar = () => {
           size={"sm"}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="bg-gray-700 border-none py-1"
+          className="bg-gray-700 text-gray-300 border-none py-1"
           placeholder="Search posts ..."
         />
         <Search
