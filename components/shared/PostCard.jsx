@@ -10,12 +10,18 @@ import { auth } from "@clerk/nextjs";
 import { Bookmark, BookmarkCheck, Edit, Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
-const PostCard = ({ post }) => {
+import LikeSavePost from "./LikeSavePost";
+const getLoggedInUser = async (id) => {
+  const res = await fetch(`http://localhost:3000/api/users/${id}`);
+  const data = await res.json();
+  return data;
+};
+const PostCard = async ({ post }) => {
   const { userId } = auth();
+  const user = await getLoggedInUser(userId);
   const currentUser = post?.creator?.clerkId;
-  const isLiked = false;
-  const isSaved = false;
+  const isLiked = user.likedPosts.filter((item) => item._id === post._id);
+  const isSaved = user.savedPosts.filter((item) => item._id === post._id);
 
   return (
     <Card className="bg-gray-900 border-none mb-4">
@@ -56,22 +62,14 @@ const PostCard = ({ post }) => {
       </CardContent>
       <CardFooter className="flex flex-col items-start">
         <p className="text-white -mt-3 mb-2">{post.tags}</p>
-        <div className="flex justify-between w-full text-white">
-          <div className="flex items-center gap-2">
-            {isLiked ? (
-              <Heart fill="red" className=" cursor-pointer" />
-            ) : (
-              <Heart className="cursor-pointer" />
-            )}
-            <p>{post?.likes.length}</p>
-          </div>
-          {!(currentUser === userId) &&
-            (isSaved ? (
-              <BookmarkCheck fill="blue" className="cursor-pointer" />
-            ) : (
-              <Bookmark className="cursor-pointer" />
-            ))}
-        </div>
+        <LikeSavePost
+          isSaved={isSaved}
+          isLiked={isLiked}
+          currentUser={currentUser}
+          userId={userId}
+          likes={post?.likes.length}
+          postId={post._id.toString()}
+        />
       </CardFooter>
     </Card>
   );

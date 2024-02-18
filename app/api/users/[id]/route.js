@@ -3,7 +3,7 @@ import User from "@/lib/Database/schema/user";
 
 export const GET = async (req, { params }) => {
   const id = params.id;
-  console.log({ id });
+
   try {
     await connectToDatabase();
 
