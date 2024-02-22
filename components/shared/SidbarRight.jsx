@@ -1,7 +1,7 @@
 import React from "react";
 import UserCard from "./UserCard";
 import { getUsers } from "@/lib/actions/createUser";
-
+import { auth } from "@clerk/nextjs";
 const getLoggedInUser = async (id) => {
   const res = await fetch(`http://localhost:3000/api/users/${id}`);
   const data = await res.json();

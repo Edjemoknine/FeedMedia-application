@@ -3,6 +3,7 @@ import { UserMinus, UserPlus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import FollowCard from "./FollowCard";
 
 const getCurrentUser = async (id) => {
   const response = await fetch(`http://localhost:3000/api/users/${id}`);

@@ -12,6 +12,13 @@ const Navbar = () => {
   const [search, setSearch] = useState("");
   const router = useRouter();
 
+  const handleSearch = () => {
+    if (search) {
+      router.push(`/search/posts/${search}`);
+    } else {
+      return false;
+    }
+  };
   return (
     <div className="w-full  flex justify-between gap-4 items-center mt-6">
       <div className="relative">
@@ -24,7 +31,7 @@ const Navbar = () => {
         />
         <Search
           className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500 "
-          onClick={() => router.push(`/search/posts/${search}`)}
+          onClick={handleSearch}
         />
       </div>
       <Button className="hidden md:flex" size={"sm"}>
